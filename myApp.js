@@ -22,13 +22,18 @@ app.get('/',(req, res)=>{
 app.get('/json',(req, res)=>{
     if (process.env.MESSAGE_STYLE === 'uppercase') {
         res.json(jsonObj.message.toUpperCase())
-    } else if(process.env.MESSAGE_STYLE === 'lowercase'){
+    } 
+    else if(process.env.MESSAGE_STYLE === 'lowercase'){
         res.json(jsonObj.message.toLowerCase())
-    } else {
-        res.json(jsonObj)
-    }
-    
+    } 
+    else { res.json(jsonObj) }
 })
+
+//using route parameters.
+app.get("/:param/echo", (req, res) => {
+    const {param} = req.params;
+    res.json({ echo: param });
+});
 
 //middleware mounted at a specific route
 app.get('/now',(req, res, next)=>{
