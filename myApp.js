@@ -1,6 +1,7 @@
 require('dotenv').config()
-let express = require('express');
-let app = express();
+const bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
 
 let jsonObj = {"message": "Hello json"}
 
@@ -13,6 +14,7 @@ app.use((req, res, next)=>{
     console.log(req.method, req.path,'-', req.ip);
     next();
 })
+
 
 //routes
 app.get('/',(req, res)=>{
@@ -42,7 +44,14 @@ app.get('/now',(req, res, next)=>{
   },(req, res)=>res.send(req.time)
 )
 
+// middleware to parse the request body
+app.use(bodyParser.urlencoded({extended: false}))   
 
+app.post("/name", (req, res) => {
+    res.json(req.body)										//json format
+    const { first, last } = req.body;
+    res.send('Name: ' + first + ' Last name: ' + last)		//string format
+});
 
 
 
