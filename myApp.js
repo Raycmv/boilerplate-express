@@ -48,7 +48,7 @@ app.get('/now',(req, res, next)=>{
 app.use(bodyParser.urlencoded({extended: false}))   
 
 app.post("/name", (req, res) => {
-    res.json(req.body)										//json format
+    res.json(req.body)		//json format
     const { first, last } = req.body;
     res.send('Name: ' + first + ' Last name: ' + last)		//string format
 });
